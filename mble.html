@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="format-detection" content="telephone=no">
+    <meta charset="utf-8" />
+    <title>Mobile authform</title>
+    <link href="assets/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/fontawesome/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="assets/mble/style.css" rel="stylesheet" />
+    <link href="assets/mble/task.css" rel="stylesheet" />
+</head>
+<body class="mobile">
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid header-block">
+        <div class="navbar-header">
+            <div class="col-xs-2">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"></button>
+            </div>
+            <div class="col-xs-2">
+            </div>
+            <div class="col-xs-4">
+            </div>
+            <div class="col-xs-2">
+        <span class="auth-links">
+                <a href="javascript:void(0)" data-instance="c0c9" class="login -js-login">Войти</a>
+    <a href="/catalog/?c=register" class="register">Регистрация</a>
+          </span>
+            </div>
+            <div class="col-xs-2">
+        <span class="cart">
+          </span>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        </div>
+    </div>
+</nav>
+<style>
+    .tasks li, .tasks a {
+        color: #bbb !important;
+    }
+    .tasks li {
+        padding: 0.3em;
+    }
+    .tasks a {
+        text-decoration: none;
+    }
+    .tasks a:hover {
+        color: #fff !important;
+    }
+    .description {
+        background: #eee;
+    }
+</style>
+<div class="promo-box _redbg">
+    <div class="container">
+        <div id="system-message-container">
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12" id="blk-finder" >
+                <h1>Состояния:</h1>
+                <ol class="tasks">
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode": "email"}'>
+                            Email - начальный статус- Кнопка недоступна
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode": "email", "test": {"login": "foo@example.net"}}'>
+                            Email - начальный статус- Кнопка доступна
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903)", "test": {"submitDisabled": true}}'>
+                            Телефон - Номер не введен полностью - Кнопка недоступна
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "test": {}}'>
+                            Телефон - номер введен полностью - кнопка доступна
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "validated": false, "message": "Неизвестный номер" }'>
+                            Телефон - ошибка валидации номера
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "test": {"processing": true, "submitDisabled": true}}'>
+                            Телефон - отправлен запрос
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "test": {"submitDisabled": true}, "rqCodeTimeout": 45}'>
+                            Телефон - ожидание повтора отправки кода
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "token": "foobar"}'>
+                            Код - начальный статус
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "token": "foobar", "rqCodeTimeout": 45}'>
+                            Код - запрос нового кода
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "token": "foobar", "test": {"processing": true, "submitDisabled": true}, "rqCodeTimeout": 45}'>
+                            Код - Отправлен запрос
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "token": "foobar", "validated": false, "message": "Указан неверный код"}'>
+                            Код - ошибка валидации (1)
+                        </a>
+                    </li>
+                    <li>
+                        <a class="-task" href="javascript:void(0)" data-state='{"mode":"phone", "phonenum": "+7 (903) 111 11 11", "token": "foobar", "validated": false, "message": "Указан неверный код", "rqCodeTimeout": 45}'>
+                            Код - ошибка валидации (2)
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container component">
+</div>
+<div class="container">
+</div>
+<div class="container">
+    <div class="container">
+        &nbsp;<p class="description">
+        п1-2 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-email'&gt; ....&lt;/script&gt;
+    </p>
+        <p class="description">
+            п3-7 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-phone'&gt; ....&lt;/script&gt; token is not defined
+        </p>
+        <p class="description">
+            п8-12 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-phone'&gt; ....&lt;/script&gt; token is defined
+        </p>
+        <p class="description">
+            Стили для элементов определять в /assets/mble/task.css. Селекторы стилей не должны включать элементов
+            выше селектора контейнера div.modal-content__auth, исключением из этого требования - селектор body.mobile
+        </p>
+    </div>
+</div>
+
+<footer class="footer-box">
+    <div class="container">
+        MOBILE TEMPLATE! --- MOBILE TEMPLATE! ---  MOBILE TEMPLATE!
+    </div>
+</footer>
+
+<!-- html's chunks vvv -->
+
+<div class="modal fade modal-window" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin-lbl" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content content modal-content__auth" id="auth-c0c9">
+            <!-- a blank container -->
+        </div>
+    </div>
+</div>
+<script type="text/html" id="tpl-auth-email">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-center" id="modalLogin-lbl">Войти в магазин</h4>
+    </div>
+    <div class="modal-body">
+        <form<%= test? " class=\"-test\"": "" %> method="post" autocomplete="off">
+        <input type="hidden" name="redirect" value="<%= redirect %>" />
+        <div class="form-group">
+            <input type="text" class="form-control input-box" name="login" placeholder="e-mail" required value="<%= (test && test.login)? test.login: "" %>">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-box" name="password" placeholder="Пароль" required value="<%= (test && test.login)? test.login: "" %>">
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <button class="btn btn-yellow submit btn-block" type="submit"<%= (test && !test.login)? " disabled": "" %>>ВОЙТИ</button>
+            </div>
+            <div class="col-sm-7 text-left auth-links">
+                <a href="/catalog/?c=register" class="register">Регистрация</a>
+                <a href="/catalog/?c=login&a=recoverypass" class="register">Забыли пароль?</a>
+                <a href="javascript:void(0)" class="register set-mode" data-val="phone">Войти по номеру телефона</a>
+            </div>
+        </div>
+        </form>
+    </div>
+</script>
+<script type="text/html" id="tpl-auth-phone">
+    <% if (!token) { %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-center" id="modalLogin-lbl">Номер телефона</h4>
+    </div>
+    <div class="modal-body">
+        <form class="phone<%= test? " -test": "" %>">
+        <input type="hidden" name="redirect" value="<%= redirect %>"/>
+        <div class="form-group">Мы отправим код в SMS или позвоним на указанный номер.</div>
+        <div class="form-group<%= validated === false? " has-error": "" %>">
+        <input type="text" class="form-control input-box -phone" name="phone"
+               value="<%= phonenum %>"
+               aria-describedby="helpBlock-c0c9"
+        />
+        <span id="helpBlock-c0c9" class="help-block"><%=raw message %></span>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="-token-rq">
+                <%=raw window.tmpl("tpl-auth-phone-token-rq", {seconds: rqCodeTimeout, test: test}) %>
+            </div>
+        </div>
+        <div class="col-sm-7 text-left auth-links">
+            <a href="/catalog/?c=register" class="register">Регистрация</a>
+            <a href="javascript:void(0)" class="register set-mode" data-val="email">Войти с email и паролем</a>
+        </div>
+    </div>
+    </form>
+    </div>
+    <% } else { %>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title text-center" id="modalLogin-lbl">Введите код</h4>
+    </div>
+    <div class="modal-body">
+        <form class="phone<%= test? " -test": "" %>" autocomplete="off">
+        <input type="hidden" name="redirect" value="<%= redirect %>"/>
+        <input type="hidden" name="token" value="<%= token %>"/>
+        <input type="hidden" name="phone" value="<%= phonenum %>"/>
+        <div class="form-group">Введите последние 4 цифры номера входящего звонка. Отвечать на звонок необязательно!</div>
+        <div class="form-group">
+            <div class="blk-number__choiced">
+                <span class="prefix">Ваш номер:</span>
+                <span class="content"><%= phonenum %></span>
+                <a class="-phone-edit" href="javascript:void(0)">Изменить</a>
+            </div>
+        </div>
+        <div class="form-group<%= validated === false? " has-error": "" %>">
+        <div class="row">
+            <div class="col-sm-4">
+                <input type="text" class="form-control input-box -code" name="code" placeholder="Код подтверждения"
+                       aria-describedby="helpBlock-c0c9"
+                />
+                <span id="helpBlock-c0c9" class="help-block"><%=raw message %></span>
+            </div>
+        </div>
+        <div class="-repeat-rq">
+            <%=raw window.tmpl("tpl-auth-phone-repeat-rq", {seconds: rqCodeTimeout}) %>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-5">
+            <button class="btn btn-yellow submit btn-block<%= test && test.processing? " -processing": "" %>"
+            <%= (!test || test.submitDisabled)? " disabled": "" %>
+            type="submit"
+            >
+            <i class="fa fa-spinner fa-spin"></i> Отправить
+            </button>
+        </div>
+        <div class="col-sm-7 text-left auth-links">
+            <a href="/catalog/?c=register" class="register">Регистрация</a>
+            <a href="javascript:void(0)" class="register set-mode" data-val="email">Войти с email и паролем</a>
+        </div>
+    </div>
+    </form>
+    </div>
+    <% } %>
+</script>
+<script type="text/html" id="tpl-auth-phone-repeat-rq">
+    <% if (seconds > 0) { %>
+    Запросить код повторно можно через <%= seconds %> сек.
+    <% } else { %>
+    <a href="javascript:void(0)" class="-action">Выслать код повторно</a>
+    <% } %>
+</script>
+<script type="text/html" id="tpl-auth-phone-token-rq">
+    <button class="btn btn-yellow submit btn-block<%= (test && test.processing)? " -processing": "" %>"
+    <%= (!test || test.submitDisabled)? " disabled": "" %>
+    data-paused="<%= !!seconds? 1: 0 %>" type="submit"
+    >
+    <i class="fa fa-spinner fa-spin"></i> Получить код<%= seconds > 0? " (" + seconds + " сек.)": "" %>
+    </button>
+</script>
+<!-- html's chunks ^^^ -->
+<div id="modal-place"><!-- place for putting content, that parsed by microtemplater --></div>
+<script src="assets/jquery.min.js"></script>
+<script src="assets/jquery.mask.min.js"></script>
+<script src="assets/bootstrap.min.js"></script>
+<script src="assets/mble/csite.js"></script>
+<script>
+    (function ($) {
+        if ($.Topic) {
+            $.Topic("app@booting", "memory").publish();
+        }
+        const AuthzPhone = (function (apiFetchToken, apiVerifyWithToken) {
+            if (apiFetchToken === undefined || apiVerifyWithToken === undefined) {
+                throw new Error("invalid args");
+            }
+            const fetch = function(obj) {
+                const dfd = $.Deferred();
+                $.ajax(obj)
+                    .fail(function (e) {
+                        dfd.reject(new Error("response is invalid"));
+                    })
+                    .then(function (data) {
+                        try {
+                            if (Object.prototype.toString.call(data) !== "[object Array]" || data.length !== 2) {
+                                throw new Error("data is corrupted");
+                            }
+                            if (!!data[0]) {
+                                throw new Error("an error was occurred");
+                            }
+                            dfd.resolve(data[1]);
+                        } catch (e) {
+                            dfd.reject(e);
+                        }
+                    });
+                return dfd.promise();
+            };
+            return function () {
+                this.fetchToken = function (numbers) {
+                    if (numbers === undefined) {
+                        throw new Error("invalid arg");
+                    }
+                    const dfd = $.Deferred();
+                    fetch({
+                        type: "POST",
+                        url: apiFetchToken,
+                        data: {
+                            'phonenum': numbers
+                        },
+                        global: false,
+                        dataType: 'json'
+                    })
+                        .then(function (data) {
+                            if (Object.prototype.toString.call(data) !== "[object Object]" || data.phonenum === undefined) {
+                                dfd.reject(new Error("data is corrupted"));
+                            } else {
+                                dfd.resolve(data);
+                            }
+                        })
+                        .fail(function (e) {
+                            dfd.reject(e);
+                        });
+                    return dfd.promise();
+                };
+                this.verifyCode = function (numbers, token, code) {
+                    if (token === undefined || code === undefined || numbers === undefined) {
+                        throw new Error("invalid arg(s)");
+                    }
+                    const dfd = $.Deferred();
+                    fetch({
+                        type: "POST",
+                        url: apiVerifyWithToken,
+                        data: {
+                            phonenum: numbers,
+                            token: token,
+                            code: code
+                        },
+                        global: false,
+                        dataType: 'json'
+                    })
+                        .then(function (data) {
+                            if (
+                                Object.prototype.toString.call(data) !== "[object Object]" ||
+                                data.phonenum === undefined ||
+                                data.token === undefined
+                            ) {
+                                dfd.reject(new Error("data is corrupted"));
+                            } else {
+                                dfd.resolve(data);
+                            }
+                        })
+                        .fail(function (e) {
+                            dfd.reject(e);
+                        });
+                    return dfd.promise();
+                };
+            }
+        }) ("/ajax.php/auth/phone/token", "/ajax.php/auth/phone/verify");
+        const preAuthLink = (function () {
+            const getUrlParameter = function getUrlParameter(sParam) {
+                const sPageURL = window.location.search.substring(1);
+                let sURLVariables = sPageURL.split('&');
+                let sParameterName;
+                let i;
+                for (i = 0; i < sURLVariables.length; i++) {
+                    sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] === sParam) {
+                        return sParameterName[1] === undefined? true: decodeURIComponent(sParameterName[1]);
+                    }
+                }
+            };
+            const preAuth = getUrlParameter('preauth');
+            const link = getUrlParameter('link');
+            return preAuth === "yes" && !!link? link: undefined;
+        }) ();
+        (function () {
+            const state = (function (mode) {
+                function State(mode) {
+                    if (mode === undefined) {
+                        throw new Error("invalid args");
+                    }
+                    this.mode = mode;
+                    this.validated = undefined;
+                    this.phonenum = "+7 (9";
+                    this.message = "";
+                    this.token = undefined;
+                    this.rqCodeTimeout = 0;
+                    this.redirect = preAuthLink || "/catalog/?c=profile&a=orders";
+                    this.test = {
+                        processing: false,
+                        submitDisabled: false,
+                        login: ""
+                    }
+                };
+                return new State(mode);
+            }) ("email");
+            if (!$.fn.Topics) {
+                throw new Error("environment is broken");
+            }
+            const app = $("#auth-c0c9");
+            if (app.length !== 1) {
+                throw new Error("defined container's ID is invalid");
+            }
+            const topic = new $.fn.Topics().create("auth-c0c9");
+            topic.event("mode").subscribe(function (type) {
+                if (type === "phone" || type === "email") {
+                    state.mode = type;
+                } else {
+                    state.mode = "email"
+                }
+                topic.event("render").publish();
+            });
+            app
+                .on("click", ".set-mode", function (event) {
+                    event.preventDefault();
+                    topic.event("mode").publish($(this).data("val"));
+                });
+            topic.event("failure").subscribe(function (message) {
+                $("#modalLogin").modal('hide');
+                $.fn.addMsg(message || "Произошла ошибка! Попробуйте запрос позже.", "error");
+            });
+            const api = new AuthzPhone();
+            app
+                .on("submit", "form", function (event) {
+                    if (state.mode === "phone") {
+                        event.preventDefault();
+                        topic.event("processing").publish();
+                        const token = $(this).find("input[name=token]");
+                        if (token.length !== 1) {
+                            api.fetchToken(
+                                $(this).find("input[name=phone]").val()
+                            )
+                                .done(function (data) {
+                                    if (!!data.token) {
+                                        if (!state.rqCodeTimeout) {
+                                            state.rqCodeTimeout = 45;
+                                        }
+                                        topic.event("countDown@render").publish();
+                                    }
+                                    topic.event("render").publish(data);
+                                })
+                                .fail(function (e) {
+                                    topic.event("failure").publish();
+                                });
+                        } else {
+                            api.verifyCode(
+                                $(this).find("input[name=phone]").val(),
+                                token.val(),
+                                $(this).find("input[name=code]").val()
+                            )
+                                .done(function (data) {
+                                    data.__proto__ = state;
+                                    if (data.validated === true) {
+                                        window.location.href = state.redirect;
+                                    } else {
+                                        topic.event("render").publish(data);
+                                        topic.event("countDown@render").publish();
+                                    }
+                                })
+                                .fail(function (e) {
+                                    topic.event("failure").publish();
+                                });
+                        }
+                    }
+                })
+            app
+                .on("change keyup keydown", "form.phone input.-phone", function (event) {
+                    const cellular = $(this).val().replace(/[\D]/g, "");
+                    topic.event("phone@validate").publish(cellular.length === 11);
+                })
+                .on("change keyup keydown", "form.phone input.-code", function (event) {
+                    let val = $(this).val().replace(/\D/g, "").substr(0, 4);
+                    $(this).val(val);
+                    topic.event("phone@validate").publish($(this).val().match(/^\d{4}$/));
+                })
+                .on("focusin", ".form-control", function (event) {
+                    $(this)
+                        .closest(".form-group.has-error, .form-group.has-success")
+                        .removeClass("has-error")
+                        .removeClass("has-success");
+                })
+                .on("click", "form.phone .-phone-edit", function (event) {
+                    event.preventDefault();
+                    topic.event("render").publish({phonenum: $(this).closest("form").find("input[name=phone]").val()});
+                })
+                .on("click", "form.phone .-repeat-rq .-action", function (event) {
+                    event.preventDefault();
+                    topic.event("processing").publish();
+                    api
+                        .fetchToken(
+                            $(this).closest("form").find("input[name=phone]").val()
+                        )
+                        .then(function (data) {
+                            state.rqCodeTimeout = 45;
+                            topic.event("render").publish(data);
+                            topic.event("countDown@render").publish();
+                        })
+                        .fail(function (e) {
+                            app.html(window.tmpl("tpl-auth-failure"));
+                        });
+                });
+            topic.event("phone@validate").subscribe(function (isValid) {
+                if (app.find("form.-test")) {
+                    return;
+                }
+                const elem = app.find("form.phone .submit");
+                if (elem.length) {
+                    elem.attr('disabled', !isValid || !!elem.data('paused'));
+                }
+            });
+            topic.event("processing").subscribe(function () {
+                app.find("form.phone .submit").addClass('-processing');
+            });
+            topic.event("processed").subscribe(function () {
+                app.find("form.phone .submit").removeClass('-processing');
+            });
+            topic.event("render").subscribe(function (data) {
+                data = (function (obj) {
+                    obj ||= {};
+                    obj.__proto__ = state;
+                    return obj;
+                }) (data);
+                app
+                    .html(
+                        window.tmpl("tpl-auth-" + data.mode, data)
+                    );
+                app
+                    .find("input, textarea, select")
+                    .change();
+                $("#modalLogin").modal('show');
+
+            });
+            (function () {
+                const render = function (target, tpl, seconds) {
+                    target
+                        .html(
+                            window.tmpl(tpl, {seconds: seconds})
+                        );
+                };
+                let handler;
+                topic.event("countDown@render").subscribe(function (seconds) {
+                    if (seconds) {
+                        state.rqCodeTimeout = seconds;
+                    }
+                    if (handler) {
+                        window.clearTimeout(handler);
+                    }
+                    handler = window.setInterval(
+                        function () {
+                            let target;
+                            if ((target = app.find("form.phone .-repeat-rq")) && target.length === 1) {
+                                render(target, "tpl-auth-phone-repeat-rq", --state.rqCodeTimeout);
+                            } else if ((target = app.find(".-token-rq")) && target.length === 1) {
+                                console.log({seconds: --state.rqCodeTimeout, test: state.test});
+                                render(target, "tpl-auth-phone-token-rq", {seconds: --state.rqCodeTimeout, test: state.test});
+                            }
+                            if (state.rqCodeTimeout === 0) {
+                                window.clearTimeout(handler);
+                                app
+                                    .find("input, textarea, select")
+                                    .change();
+                            }
+                        },
+                        1000
+                    );
+                });
+            }) ();
+            $('.-js-login')
+                .click(function (e) {
+                    e.preventDefault();
+                    topic.event("render").publish({mode: "email"});
+                });
+        }) ();
+        if ($.Topic) {
+            $.Topic("app@booted", "memory").publish();
+        }
+    }) (jQuery);
+</script>
+<script>
+    $(document).on("click", ".-task", function (ev) {
+        ev.preventDefault();
+        const instance = $(".-js-login").data('instance');
+        if (instance) {
+            const topic = new $.fn.Topics().createOrFetch("auth-" + instance);
+            try {
+                topic.event("render").publish($(this).data('state'));
+            } catch (e) {
+                alert("Error is occurred :(")
+                //window.location.href = window.location.href;
+            }
+        }
+    });
+</script>
+</body>
+</html>

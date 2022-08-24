@@ -1,0 +1,12 @@
+#auth-c0c9 .phone .submit > .fa-spinner {
+    display: none;
+}
+#auth-c0c9 .phone .submit.-processing > .fa-spinner {
+    display: inline-block;
+}
+#auth-c0c9 .phone .help-block {
+    display: none;
+}
+#auth-c0c9 .phone .form-group.has-error .help-block {
+    display: block;
+}
