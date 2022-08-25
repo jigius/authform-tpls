@@ -6,7 +6,7 @@
     <link href="assets/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/fontawesome/fontawesome-all.min.css" rel="stylesheet" />
     <link href="assets/dsktp/style.css" rel="stylesheet" />
-    <link href="assets/dsktp/task.css" rel="stylesheet" />
+    <link href="assets/task.css" rel="stylesheet" />
 </head>
 <body>
 <div class="container header-box">
@@ -119,19 +119,6 @@
     </div>
 </div>
 <div class="container">
-    &nbsp;<p class="description">
-    п1-2 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-email'&gt; ....&lt;/script&gt;
-</p>
-    <p class="description">
-        п3-7 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-phone'&gt; ....&lt;/script&gt; token is not defined
-    </p>
-    <p class="description">
-        п8-12 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-phone'&gt; ....&lt;/script&gt; token is defined
-    </p>
-    <p class="description">
-        Стили для элементов определять в /assets/dsktp/task.css. Селекторы стилей не должны включать элементов
-        выше селектора контейнера div.modal-content__auth
-    </p>
 </div>
 <footer class="footer-box">
     <div class="container">
@@ -149,7 +136,7 @@
 
 <div class="modal fade modal-window" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin-lbl" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content content modal-content__auth" id="auth-c0c9">
+        <div class="modal-content content auth-content" id="auth-c0c9">
             <!-- a blank container -->
         </div>
     </div>

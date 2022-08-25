@@ -8,7 +8,7 @@
     <link href="assets/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/fontawesome/fontawesome-all.min.css" rel="stylesheet" />
     <link href="assets/mble/style.css" rel="stylesheet" />
-    <link href="assets/mble/task.css" rel="stylesheet" />
+    <link href="assets/task.css" rel="stylesheet" />
 </head>
 <body class="mobile">
 <nav class="navbar navbar-default" role="navigation">
@@ -132,21 +132,6 @@
 <div class="container">
 </div>
 <div class="container">
-    <div class="container">
-        &nbsp;<p class="description">
-        п1-2 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-email'&gt; ....&lt;/script&gt;
-    </p>
-        <p class="description">
-            п3-7 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-phone'&gt; ....&lt;/script&gt; token is not defined
-        </p>
-        <p class="description">
-            п8-12 Вывод происходит с помощью шаблона &lt;script id='tpl-auth-phone'&gt; ....&lt;/script&gt; token is defined
-        </p>
-        <p class="description">
-            Стили для элементов определять в /assets/mble/task.css. Селекторы стилей не должны включать элементов
-            выше селектора контейнера div.modal-content__auth, исключением из этого требования - селектор body.mobile
-        </p>
-    </div>
 </div>
 
 <footer class="footer-box">
@@ -159,7 +144,7 @@
 
 <div class="modal fade modal-window" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="modalLogin-lbl" aria-hidden="true">
     <div class="modal-dialog modal-sm">
-        <div class="modal-content content modal-content__auth" id="auth-c0c9">
+        <div class="modal-content content auth-content" id="auth-c0c9">
             <!-- a blank container -->
         </div>
     </div>
@@ -577,7 +562,6 @@
                             if ((target = app.find("form.phone .-repeat-rq")) && target.length === 1) {
                                 render(target, "tpl-auth-phone-repeat-rq", --state.rqCodeTimeout);
                             } else if ((target = app.find(".-token-rq")) && target.length === 1) {
-                                console.log({seconds: --state.rqCodeTimeout, test: state.test});
                                 render(target, "tpl-auth-phone-token-rq", {seconds: --state.rqCodeTimeout, test: state.test});
                             }
                             if (state.rqCodeTimeout === 0) {
