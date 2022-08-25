@@ -1,7 +1,7 @@
 # authform-tpls
 Материалы для верстки виджета авторизации для двух шаблонов.
 
-[Онлайн версия](http://carlo.creachoo.ru/tasks/authforms-tpls/)
+[Онлайн версия](http://carlo.creachoo.ru/tasks/authform-tpls/)
 
 ### Страница с шаблоном desktop
 
